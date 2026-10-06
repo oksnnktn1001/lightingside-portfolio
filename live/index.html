@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#06090b">
+  <title>MORI — Live Previsualization</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%2306090b%22/><path d=%22M10 43c10-23 19 14 29-9 5-12 10-9 15-14%22 fill=%22none%22 stroke=%22%2369f6ff%22 stroke-width=%224%22/></svg>">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./movement.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">MORI</span><span>LIVE PREVIS</span></div>
+      <div class="status"><i></i><span>REAL TIME</span><b id="fps">60 FPS</b></div>
+      <button class="ghost" id="helpBtn">КАК УПРАВЛЯТЬ</button>
+    </header>
+
+    <section class="workspace">
+      <div class="stage-wrap">
+        <canvas id="stage" aria-label="Интерактивная трёхмерная превизуализация пространства"></canvas>
+        <div class="stage-hud">
+          <span id="sceneName">02 / CALM WATER</span>
+          <span>DRAG — ORBIT · WHEEL — ZOOM</span>
+        </div>
+        <div class="stage-legend">
+          <span><i class="cyan"></i> ПРОЕКЦИИ</span>
+          <span><i class="amber"></i> БИМЫ</span>
+          <span><i class="violet"></i> ПОТОЛОЧНЫЕ</span>
+          <span><i class="white"></i> FRAMER / КОЛОННЫ</span>
+        </div>
+      </div>
+
+      <aside class="console">
+        <section class="module show-module">
+          <div class="module-head"><span>SHOW CONTROL</span><b id="timecode">00:00:00</b></div>
+          <div class="transport">
+            <button id="playBtn" class="primary">▶ AUTO SHOW</button>
+            <button id="blackoutBtn">BLACKOUT</button>
+          </div>
+          <div class="cue-grid" id="cueGrid"></div>
+        </section>
+
+        <section class="module">
+          <div class="module-head"><span>FIXTURES</span><b id="fixtureCount">13 ACTIVE</b></div>
+          <div class="segmented" id="fixtureGroups">
+            <button data-group="all" class="active">ALL</button><button data-group="left">LEFT</button><button data-group="right">RIGHT</button><button data-group="ceiling">CEILING</button><button data-group="framer">FRAMER</button>
+          </div>
+          <button id="movementBtn" class="movement-btn active">MOVEMENT ON</button>
+          <div class="control-grid">
+            <label>PAN <output id="panOut">0°</output><input id="pan" type="range" min="-90" max="90" value="0"></label>
+            <label>TILT <output id="tiltOut">-18°</output><input id="tilt" type="range" min="-65" max="40" value="-18"></label>
+            <label>BEAM <output id="beamOut">18%</output><input id="beam" type="range" min="3" max="55" value="18"></label>
+            <label>DIMMER <output id="dimmerOut">72%</output><input id="dimmer" type="range" min="0" max="100" value="72"></label>
+          </div>
+          <div class="fixture-row" id="fixtureRow"></div>
+        </section>
+
+        <section class="module visuals-module">
+          <div class="module-head"><span>GENERATIVE VISUALS</span><b>3 SURFACES</b></div>
+          <div class="looks">
+            <label>LOOK A<select id="lookA"></select></label>
+            <label>LOOK B<select id="lookB"></select></label>
+          </div>
+          <label class="wide-control">A / B MIX <output id="mixOut">25%</output><input id="mix" type="range" min="0" max="100" value="25"></label>
+          <div class="control-grid">
+            <label>PARTICLES <output id="particlesOut">35%</output><input id="particles" type="range" min="0" max="100" value="35"></label>
+            <label>AUDIO REACT <output id="audioOut">20%</output><input id="audio" type="range" min="0" max="100" value="20"></label>
+            <label>SPEED <output id="speedOut">45%</output><input id="speed" type="range" min="0" max="100" value="45"></label>
+            <label>DEPTH <output id="depthOut">55%</output><input id="depth" type="range" min="0" max="100" value="55"></label>
+          </div>
+          <button id="pulseBtn" class="pulse-btn">TAP / AUDIO PULSE</button>
+        </section>
+      </aside>
+    </section>
+
+    <section class="explain" id="explain">
+      <div><small>SYSTEM MAP</small><h2>Один пульт — всё пространство</h2></div>
+      <div class="flow">
+        <article><b>01</b><h3>Сценарий</h3><p>Запускает состояние света, проекций и темпа.</p></article>
+        <i>→</i><article><b>02</b><h3>Приборы</h3><p>Выбираются группой или по одному. Луч можно направлять.</p></article>
+        <i>→</i><article><b>03</b><h3>Генеративное море</h3><p>Два визуала смешиваются и реагируют на звук.</p></article>
+        <i>→</i><article><b>04</b><h3>Три поверхности</h3><p>Левая, дальняя и правая стены получают единый образ.</p></article>
+      </div>
+      <p class="safety">Это безопасная превизуализация: физические DMX, лазеры и проекторы здесь не включаются.</p>
+    </section>
+  </main>
+
+  <dialog id="helpDialog">
+    <button id="closeHelp" class="close">×</button>
+    <small>MORI / QUICK START</small>
+    <h2>Как читать эту модель</h2>
+    <ol>
+      <li><b>Покрутите пространство</b> мышью прямо на сцене; колесо приближает камеру.</li>
+      <li><b>Выберите приборы</b> группой или нажмите номер отдельного прибора.</li>
+      <li><b>Измените Pan и Tilt</b> — направление выбранных лучей изменится сразу.</li>
+      <li><b>Смешайте Look A и B</b>, затем добавьте частицы и аудиореактивность.</li>
+      <li><b>Нажмите Auto Show</b>, чтобы увидеть последовательность состояний целиком.</li>
+    </ol>
+  </dialog>
+  <script src="./app.js"></script>
+</body>
+</html>
+

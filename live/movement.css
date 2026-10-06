@@ -1,0 +1,24 @@
+.movement-btn {
+  width: 100%;
+  margin-top: 7px;
+  color: #657178;
+  border-color: #334047;
+}
+.movement-btn.active {
+  color: var(--amber);
+  border-color: #74552b;
+  background: #2a1e0e;
+  box-shadow: inset 0 0 22px #ffb84b18;
+}
+.movement-btn.active::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 10px var(--amber);
+}
+.white { background: #e7fbff; box-shadow: 0 0 7px #bcefff; }
+
