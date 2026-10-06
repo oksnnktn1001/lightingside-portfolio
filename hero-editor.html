@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#030303">
+  <title>Редактор обложки — Оксана Никитина</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/hero-editor.css?v=1">
+  <script src="js/hero-editor.js?v=1" defer></script>
+</head>
+<body>
+  <main class="editor">
+    <header class="editor__bar">
+      <div><strong>ОN.</strong><span>Редактор обложки</span></div>
+      <p>Выбери изображение и перетаскивай его мышкой. Размер — колёсиком или ползунком.</p>
+      <a href="/?v=26#top">Вернуться на сайт</a>
+    </header>
+
+    <section class="stage" data-stage aria-label="Макет главной обложки">
+      <img class="layer layer--horizon" data-layer="horizon" src="img/identity-horizon.jpg" alt="Световая линия">
+      <img class="layer layer--eclipse" data-layer="eclipse" src="img/identity-eclipse.jpg" alt="Световой круг">
+      <img class="layer layer--beam" data-layer="beam" src="img/identity-beam.jpg" alt="Световой луч">
+      <div class="stage__veil"></div>
+      <div class="stage__micro"><span>Свет как инструмент<br>эмоциональной архитектуры</span><span>Портфолио / 2026</span></div>
+      <div class="stage__title"><h1>Никитина <span>Оксана</span></h1><strong>Светодизайнер</strong><small>Исследователь световой среды</small></div>
+    </section>
+
+    <aside class="controls">
+      <div class="controls__tabs" role="tablist" aria-label="Слои">
+        <button class="is-active" type="button" data-select="eclipse">Круг</button>
+        <button type="button" data-select="horizon">Линия</button>
+        <button type="button" data-select="beam">Луч</button>
+      </div>
+      <label>Размер <input type="range" min="15" max="160" step="1" data-control="size"></label>
+      <label>Прозрачность <input type="range" min="0" max="100" step="1" data-control="opacity"></label>
+      <label>Скорость движения <input type="range" min="0" max="100" step="1" data-control="motion"></label>
+      <div class="controls__actions">
+        <button type="button" data-reset>Сбросить</button>
+        <button type="button" data-copy>Скопировать настройки</button>
+      </div>
+      <output data-status>Выбран слой «Круг»</output>
+    </aside>
+  </main>
+</body>
+</html>

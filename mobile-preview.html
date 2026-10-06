@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Мобильная версия — Оксана Никитина</title>
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#161616;color:#ece9e1;font-family:Arial,sans-serif}
+    body{display:grid;grid-template-rows:auto 1fr;overflow:hidden}
+    header{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:56px;padding:.7rem 1rem;border-bottom:1px solid #383838;background:#0b0b0b}
+    header strong{font-size:.85rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase}
+    header span{color:#8d8d8d;font-size:.72rem}
+    .stage{display:grid;place-items:center;min-height:0;padding:18px;overflow:auto}
+    .phone{width:390px;height:min(844px,calc(100vh - 92px));min-height:580px;border:1px solid #4a4a4a;border-radius:22px;overflow:hidden;background:#030303;box-shadow:0 22px 60px rgba(0,0,0,.48)}
+    iframe{display:block;width:100%;height:100%;border:0;background:#030303}
+    @media(max-width:440px){header span{display:none}.stage{padding:0}.phone{width:100vw;height:calc(100vh - 56px);min-height:0;border:0;border-radius:0}}
+  </style>
+</head>
+<body>
+  <header><strong>Мобильная версия сайта</strong><span>390 × 844 · внутри можно прокручивать и открывать разделы</span></header>
+  <main class="stage">
+    <div class="phone"><iframe src="./?v=74-mobile#top" title="Мобильная версия портфолио Оксаны Никитиной"></iframe></div>
+  </main>
+</body>
+</html>

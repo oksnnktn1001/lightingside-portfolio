@@ -1,0 +1,16 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Общий редактор трёх экранов</title><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/layout-editor.css?v=1"><script src="js/layout-editor.js?v=1" defer></script></head><body>
+<header><strong>ОN.</strong><span>Общий редактор</span><nav><button class="active" data-page="cover">1 / Обложка</button><button data-page="manifest">2 / Манифест</button><button data-page="circle">3 / Круг</button></nav><a href="/?v=33#top">На сайт</a></header>
+<main>
+  <section class="stage active cover" data-stage="cover">
+    <img class="item blend" data-item="eclipse" src="img/identity-eclipse.jpg" alt="Круг"><img class="item blend" data-item="horizon" src="img/identity-horizon.jpg" alt="Линия"><img class="item blend" data-item="coverBeam" src="img/identity-beam.jpg" alt="Луч">
+    <div class="item cover-title" data-item="coverTitle"><h1>НИКИТИНА<span>ОКСАНА</span></h1><strong>СВЕТОДИЗАЙНЕР</strong><small>ИССЛЕДОВАТЕЛЬ СВЕТОВОЙ СРЕДЫ</small></div><div class="micro left">Свет как инструмент<br>эмоциональной архитектуры</div><div class="micro right">Портфолио / 2026</div>
+  </section>
+  <section class="stage manifest" data-stage="manifest">
+    <img class="item blend" data-item="manifestBeam" src="img/identity-beam.jpg" alt="Луч"><img class="item person" data-item="person" src="img/manifest-person-02.png" alt="Человек"><div class="item manifest-title" data-item="manifestTitle"><small>01 / Манифест</small><h2>Я ВЕРЮ, ЧТО<br>СВЕТ СПОСОБЕН<br>МЕНЯТЬ НЕ ТОЛЬКО<br>ПРОСТРАНСТВО,<br>НО И ЧЕЛОВЕКА<br>ВНУТРИ НЕГО.</h2></div>
+  </section>
+  <section class="stage circle-page" data-stage="circle">
+    <div class="item ring" data-item="ring"></div><p class="item circle-title" data-item="circleTitle">ДЛЯ МЕНЯ<br>СВЕТОДИЗАЙН<br>— ЭТО РАБОТА<br>С ВОСПРИЯТИЕМ</p><div class="item copy" data-item="copy"><p>Меня особенно привлекает момент, когда свет перестаёт быть просто функцией и становится переживанием — влияет на состояние человека, направляет его внимание, меняет ощущение масштаба и глубины пространства.</p><p>Для этого важно понимать физику света, его взаимодействие с архитектурой, материалами и поверхностями — и использовать эти закономерности, чтобы создавать не просто освещение, а определённое состояние внутри пространства.</p></div>
+  </section>
+</main>
+<aside><div class="element-buttons" data-element-buttons></div><label><span data-size-label>Размер</span><input type="range" min="3" max="160" step="1" data-size></label><label>Прозрачность<input type="range" min="0" max="100" step="1" data-opacity></label><button data-reset>Сбросить экран</button><button data-copy>Скопировать всё</button><output data-status>Настройки сохраняются автоматически</output></aside>
+</body></html>
