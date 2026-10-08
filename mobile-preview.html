@@ -20,7 +20,16 @@
 <body>
   <header><strong>Мобильная версия сайта</strong><span>390 × 844 · внутри можно прокручивать и открывать разделы</span></header>
   <main class="stage">
-    <div class="phone"><iframe src="./?v=74-mobile#top" title="Мобильная версия портфолио Оксаны Никитиной"></iframe></div>
+    <div class="phone"><iframe id="mobile-site" src="./?v=82-mobile#top" title="Мобильная версия портфолио Оксаны Никитиной"></iframe></div>
   </main>
+  <script>
+    const frame = document.querySelector('#mobile-site');
+    const openSection = () => {
+      const section = location.hash || '#top';
+      frame.src = `./?v=82-mobile${section}`;
+    };
+    addEventListener('hashchange', openSection);
+    openSection();
+  </script>
 </body>
 </html>

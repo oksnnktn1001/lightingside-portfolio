@@ -668,3 +668,162 @@
   line-height:.94;overflow-wrap:anywhere;
  }
 }
+
+/* v81 — unified display typography. Previous display sizes reduced by 1.3. */
+:root{
+ --display-title-xl:clamp(3.85rem,10vw,10rem);
+ --display-title-l:clamp(2.7rem,6.15vw,6.9rem);
+}
+
+/* Main section and project-cover titles now share one scale. */
+.projects__head h2,
+.skills__head h2,
+.formats__head h2,
+.objects__head h2,
+.project-hero h1,
+.museum-cover__meta h1,
+.cloud-cover__meta h1{
+ font-size:var(--display-title-xl);
+}
+
+/* Long and secondary display headings keep a single compact scale. */
+.project-story h2,
+.museum-explorer__head h2,
+.museum-a5__head h2,
+.cloud-model__head h2,
+.object-study__head h2,
+.sidur-plan h2,
+.sidur-section-head h2,
+.sidur-meaning h2{
+ font-size:var(--display-title-l);
+}
+
+/* Manifest and contact are long compositions: same 1.3 reduction, no reflow of layout. */
+.manifest-light__headline h2{font-size:clamp(2.5rem,4.42vw,5.38rem)}
+.manifest-perception__text{font-size:1.62vw}
+.contact h2{font-size:clamp(2.77rem,5.46vw,5.77rem)}
+
+/* Hero remains geometrically centred; only its type scale changes. */
+@media(min-width:801px){
+ .hero__name{
+  left:50%;right:auto;
+  transform:translate(-50%,-50%);
+  text-align:center;
+ }
+ .hero__name h1{font-size:7.69vw}
+ .hero__role{
+  left:50%;right:auto;
+  transform:translateX(-50%);
+  text-align:center;
+ }
+ .hero__role strong{font-size:clamp(1.38rem,3.08vw,3.08rem)}
+ .project-page[data-project="theatre"] .project-hero h1,
+ .project-page[data-project="vdnh"] .project-hero h1{font-size:var(--display-title-xl)}
+}
+
+@media(max-width:800px){
+ :root{
+  --display-title-xl:clamp(3rem,16.92vw,7rem);
+  --display-title-l:clamp(2.2rem,10.77vw,4.8rem);
+ }
+ .manifest-perception__text{font-size:3.85vw}
+ .contact h2{font-size:clamp(1.81rem,7.46vw,3.46rem)}
+}
+
+@media(max-width:600px){
+ .hero__name{
+  left:50%;right:auto;
+  transform:translate(-50%,-50%);
+  text-align:center;
+ }
+ .hero__name h1{font-size:min(11.54vw,3.27rem)}
+ .hero__role{
+  left:50%;right:auto;
+  transform:translateX(-50%);
+  text-align:center;
+ }
+ .hero__role strong{font-size:clamp(1.38rem,6.92vw,1.92rem)}
+ .projects__head h2,
+ .skills__head h2,
+ .formats__head h2,
+ .objects__head h2,
+ .project-hero h1,
+ .museum-cover__meta h1,
+ .cloud-cover__meta h1{font-size:var(--display-title-xl)}
+}
+
+/* v82 — one restrained mobile scale for headings and subheadings. */
+@media(max-width:600px){
+ :root{
+  --display-title-xl:clamp(2.65rem,13vw,4.5rem);
+  --display-title-l:clamp(2rem,9vw,3.5rem);
+  --display-subtitle:clamp(1.9rem,8.5vw,2.75rem);
+ }
+
+ .hero__role{
+  left:50%;right:auto;
+  width:calc(100% - 2 * var(--gutter));
+  transform:translateX(-50%);
+  text-align:center;
+  justify-items:center;
+ }
+ .hero__role strong{
+  width:100%;
+  font-size:clamp(1.05rem,5.4vw,1.45rem);
+  text-align:center;
+ }
+
+ .manifest-light__headline h2,
+ .manifest-perception__text{
+  max-width:100%;
+  font-size:var(--display-title-l);
+ }
+ .contact h2{font-size:var(--display-subtitle)}
+
+ .projects__head h2,
+ .skills__head h2,
+ .formats__head h2,
+ .objects__head h2,
+ .project-hero h1,
+ .museum-cover__meta h1,
+ .cloud-cover__meta h1{
+  max-width:100%;
+  font-size:var(--display-title-xl);
+  overflow-wrap:normal;
+  word-break:normal;
+ }
+
+ .project-story h2,
+ .museum-explorer__head h2,
+ .museum-a5__head h2,
+ .cloud-model__head h2,
+ .object-study__head h2,
+ .sidur-plan h2,
+ .sidur-section-head h2,
+ .sidur-meaning h2{
+  max-width:100%;
+  font-size:var(--display-title-l);
+ }
+
+ .case h3,
+ .project-row h3,
+ .skills__grid h3,
+ .format-card h3,
+ .formats__media h3,
+ .media-capabilities h3,
+ .media-feature__meta h3,
+ .media-capabilities h3{
+  max-width:100%;
+  font-size:var(--display-subtitle);
+  line-height:.9;
+  overflow-wrap:normal;
+  word-break:normal;
+ }
+}
+
+/* v83 — restore the approved desktop type scale on the first two screens only. */
+@media(min-width:801px){
+ .hero__name h1{font-size:10vw}
+ .hero__role strong{font-size:clamp(1.8rem,4vw,4rem)}
+ .manifest-light__headline h2{font-size:clamp(3.25rem,5.75vw,7rem)}
+}
