@@ -827,3 +827,15 @@
  .hero__role strong{font-size:clamp(1.8rem,4vw,4rem)}
  .manifest-light__headline h2{font-size:clamp(3.25rem,5.75vw,7rem)}
 }
+
+/* v84 — scale the approved desktop hero composition as one unit. */
+.hero__composition{display:contents}
+@media(min-width:801px){
+ .hero__composition{
+  position:absolute;z-index:1;inset:0;display:block;
+  transform:scale(.5);transform-origin:50% 50%;
+ }
+}
+
+/* Keep words intact across every viewport. */
+body *{overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
