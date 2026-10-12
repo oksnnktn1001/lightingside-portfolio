@@ -29,6 +29,15 @@
   let dragging = false, lastX = 0, lastY = 0, autoRotate = !reduceMotion, resumeTimer = 0;
   let laserX = 0, laserY = 0, laserTargetX = 0, laserTargetY = 0;
   let model, baseRayPath = [];
+  let visible = false, frame = 0;
+  const schedule = () => {
+    if (model && visible && !document.hidden && !frame) frame = requestAnimationFrame(render);
+  };
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    schedule();
+  }).observe(host);
+  document.addEventListener('visibilitychange', schedule);
 
   const rayPathFromSegments = (segments) => {
     const points = [];
@@ -82,6 +91,8 @@
   };
 
   const render = () => {
+    frame = 0;
+    if (!visible || document.hidden) return;
     resize();
     if (autoRotate && !dragging) yaw += .00125;
     laserX += (laserTargetX - laserX) * .075;
@@ -108,7 +119,7 @@
     drawPart(model.rays, gl.LINES, [.02, .3, 1, .22], 6);
     drawPart(model.rays, gl.LINES, [.12, .76, 1, 1], 2);
     drawPart(model.rays, gl.POINTS, [.72, .94, 1, .9], 1);
-    requestAnimationFrame(render);
+    schedule();
   };
 
   host.addEventListener('pointerdown', (event) => { dragging = true; autoRotate = false; window.clearTimeout(resumeTimer); lastX = event.clientX; lastY = event.clientY; host.classList.add('is-dragging'); host.setPointerCapture(event.pointerId); });
@@ -127,7 +138,7 @@
       model = { glass: make(data.glass), mirror: make(data.mirror), wire: make(data.wire), inputRay: make(paths.input, true), rays: make(paths.internal, true), projector: make(projectorFan(0, 0), true) };
       status.textContent = `${data.meta.mirrorTriangles} зеркальных граней · меняющийся маршрут лазера`;
       setTimeout(() => status.classList.add('is-hidden'), 1500);
-      requestAnimationFrame(render);
+      schedule();
     })
     .catch(() => { status.textContent = 'Не удалось загрузить модель'; });
 })();

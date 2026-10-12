@@ -839,3 +839,6 @@
 
 /* Keep words intact across every viewport. */
 body *{overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
+
+/* Clip the decorative off-canvas circle, not the document viewport. */
+.project-hero{overflow:clip}

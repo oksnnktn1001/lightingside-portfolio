@@ -1,0 +1,20 @@
+# Heavy source files remain in Git, but are not required by the public site.
+docs/kresty.pdf
+
+# Replaced in production by much smaller WebP versions.
+img/contact-wave-hd.png
+img/mori/caustics-loop.gif
+img/museum/zone-01-graphic.png
+img/museum/zone-02-graphic.png
+img/museum/zone-03-graphic.png
+img/museum/zone-04-graphic.png
+img/museum/zone-05-graphic.png
+img/museum/zone-06-graphic.png
+img/museum/zone-07-graphic.png
+img/museum/zone-08-graphic.png
+img/cloud/projector-waves.png
+img/cloud/cold-spectrum.png
+img/cloud/optical-core.png
+img/cloud/prismatic.png
+img/cloud/projector-clouds.png
+img/cloud/facet-trace.png
