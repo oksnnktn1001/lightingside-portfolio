@@ -842,3 +842,6 @@ body *{overflow-wrap:normal!important;word-break:normal!important;hyphens:none!i
 
 /* Clip the decorative off-canvas circle, not the document viewport. */
 .project-hero{overflow:clip}
+
+/* Essential content stays readable while JavaScript is slow or unavailable. */
+.reveal:not(.is-visible){opacity:1;transform:none}

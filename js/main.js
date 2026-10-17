@@ -104,9 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (waveCanvas) {
     const context = waveCanvas.getContext('2d');
     const section = waveCanvas.closest('.skills');
+    if (!context || !section) return;
     let width = 0;
     let height = 0;
-    let visible = true;
+    let visible = false;
     let frame = 0;
     let lastTime = 0;
     let pointer = { x: 0, y: 0, active: false };
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const previous = ripples[ripples.length - 1];
       if (previous && Math.hypot(previous.x - x, previous.y - y) < 18) return;
       ripples.push({ x, y, age: 0, strength });
-      if (ripples.length > 12) ripples.shift();
+      if (ripples.length > 6) ripples.shift();
     };
 
     const updatePointer = (event) => {
@@ -137,11 +138,16 @@ document.addEventListener('DOMContentLoaded', () => {
       pointer.y = event.clientY - rect.top;
       pointer.active = true;
       addRipple(pointer.x, pointer.y, .95);
+      if (reduceMotion) drawWave(0);
+      else scheduleWave();
     };
 
     section.addEventListener('pointermove', updatePointer, { passive: true });
     section.addEventListener('pointerenter', updatePointer, { passive: true });
-    section.addEventListener('pointerleave', () => { pointer.active = false; }, { passive: true });
+    section.addEventListener('pointerleave', () => {
+      pointer.active = false;
+      if (reduceMotion) drawWave(0);
+    }, { passive: true });
 
     const drawWave = (time = 0, delta = 16) => {
       context.clearRect(0, 0, width, height);
@@ -201,22 +207,43 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
+    const scheduleWave = () => {
+      if (!frame && visible && !document.hidden && !reduceMotion) {
+        frame = window.requestAnimationFrame(animateWave);
+      }
+    };
     const animateWave = (time) => {
+      frame = 0;
+      if (!visible || document.hidden) return;
       const delta = Math.min(34, time - lastTime || 16);
-      if (visible && time - lastTime >= 1000 / 40) {
+      if (time - lastTime >= 1000 / 30) {
         drawWave(time, delta);
         lastTime = time;
       }
-      frame = window.requestAnimationFrame(animateWave);
+      scheduleWave();
     };
 
     resizeWave();
     window.addEventListener('resize', resizeWave, { passive: true });
     if ('IntersectionObserver' in window && section) {
-      new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { rootMargin: '20%' }).observe(section);
-    }
-    if (reduceMotion) drawWave(0);
-    else frame = window.requestAnimationFrame(animateWave);
-    window.addEventListener('pagehide', () => window.cancelAnimationFrame(frame), { once: true });
+      new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        scheduleWave();
+      }, { rootMargin: '20%' }).observe(section);
+    } else visible = true;
+    drawWave(0);
+    scheduleWave();
+    window.addEventListener('pagehide', () => {
+      window.cancelAnimationFrame(frame);
+      frame = 0;
+    });
+    window.addEventListener('pageshow', () => {
+      const rect = section.getBoundingClientRect();
+      visible = rect.bottom > 0 && rect.top < window.innerHeight;
+      lastTime = 0;
+      resizeWave();
+      scheduleWave();
+    });
+    document.addEventListener('visibilitychange', scheduleWave);
   }
 });

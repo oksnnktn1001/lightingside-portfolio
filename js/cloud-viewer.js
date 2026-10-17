@@ -38,6 +38,7 @@
     schedule();
   }).observe(host);
   document.addEventListener('visibilitychange', schedule);
+  window.addEventListener('pageshow', schedule);
 
   const rayPathFromSegments = (segments) => {
     const points = [];
